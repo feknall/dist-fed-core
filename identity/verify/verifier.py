@@ -20,7 +20,7 @@ from identity.base.agent_container import (  # noqa:E402
     create_agent_with_args,
     AriesAgent,
 )
-from identity.base import (  # noqa:E402
+from identity.base.support.agent import (  # noqa:E402
     CRED_FORMAT_INDY,
     CRED_FORMAT_JSON_LD,
 )

@@ -6,6 +6,7 @@ import sys
 
 from aiohttp import ClientError
 
+from identity.base.support.demo_agent import CRED_FORMAT_INDY, CRED_FORMAT_JSON_LD
 from identity.base.support.utils import log_json
 from identity.issuer.issuer_agent import IssuerAgent
 
@@ -14,12 +15,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from identity.base.agent_container import (  # noqa:E402
     arg_parser,
     create_agent_with_args,
-    AriesAgent,
 )
-from identity.base import (  # noqa:E402
-    CRED_FORMAT_INDY,
-    CRED_FORMAT_JSON_LD,
-)
+
 from identity.base.support.utils import (  # noqa:E402
     log_msg,
     log_status,
@@ -33,7 +30,6 @@ TAILS_FILE_COUNT = int(os.getenv("TAILS_FILE_COUNT", 100))
 
 logging.basicConfig(level=logging.WARNING)
 LOGGER = logging.getLogger(__name__)
-
 
 
 async def main(args):

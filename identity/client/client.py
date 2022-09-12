@@ -13,12 +13,12 @@ from identity.common.fabric_ca_client_wrapper import FabricCaClientWrapper
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from identity.base.agent_container import (  # noqa:E402
+from identity.base.agent_container import (
     arg_parser,
     create_agent_with_args,
-    AriesAgent,
 )
-from identity.base.support.utils import (  # noqa:E402
+
+from identity.base.support.utils import (
     check_requires,
     log_msg,
     log_status,
@@ -107,9 +107,6 @@ async def main(args):
 
         await client_agent.initialize(the_agent=agent)
 
-        # log_status("#9 Input verify.py invitation details")
-        # await input_invitation(client_agent)
-
         options = "    (3) Send Message\n" \
                   "    (4) Receive New Invitation\n" \
                   "    (5) Propose a Credential \n" \
@@ -178,7 +175,7 @@ async def main(args):
                         }
                     }
                     proposal_resp = await client_agent.agent.admin_POST("/issue-credential/send-proposal",
-                                                                       data=proposal_request)
+                                                                        data=proposal_request)
                     cred_ex_id = proposal_resp["credential_exchange_id"]
                     client_agent.agent.cred_ex_id = cred_ex_id
                     log_msg(f"Credential proposal sent successfully. credential_exchange_id: {cred_ex_id}")
@@ -303,12 +300,12 @@ async def main(args):
                     enrollment_id = await prompt("Enter enrollment id: ")
                     enrollment_secret = await prompt("Enter enrollment secret: ")
                     fabric_ca_client_wrapper = FabricCaClientWrapper(fabric_ca_arg_parser.home,
-                                                                      fabric_ca_arg_parser.address,
-                                                                      fabric_ca_arg_parser.port,
-                                                                      fabric_ca_arg_parser.caname,
-                                                                      fabric_ca_arg_parser.tls_certfiles,
-                                                                      enrollment_id,
-                                                                      enrollment_secret)
+                                                                     fabric_ca_arg_parser.address,
+                                                                     fabric_ca_arg_parser.port,
+                                                                     fabric_ca_arg_parser.caname,
+                                                                     fabric_ca_arg_parser.tls_certfiles,
+                                                                     enrollment_id,
+                                                                     enrollment_secret)
                     fabric_ca_client_wrapper.enroll_msp(fabric_ca_arg_parser.msp)
                 except Exception as e:
                     log_msg("Something went wrong. Error: {}".format(str(e)))

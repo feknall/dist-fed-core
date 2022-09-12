@@ -2,14 +2,6 @@ from identity.base.support.utils import log_msg
 
 
 class FabricCaArgParser:
-    home = ""
-    id = ""
-    secret = ""
-    address = ""
-    port = ""
-    tls_certfiles = ""
-    caname = ""
-    msp = ""
 
     def __init__(self, args):
         self.home = args.fabric_ca_client_home

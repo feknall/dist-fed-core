@@ -4,13 +4,6 @@ from identity.base.support.utils import log_msg
 
 
 class FabricCaClientWrapper:
-    home = None
-    address = None
-    port = None
-    caname = None
-    tls_certfiles = None
-    enrollment_id = None
-    enrollment_secret = None
 
     def __init__(self, home: str,
                  address: str,
@@ -85,4 +78,3 @@ class FabricCaClientWrapper:
 
     def register_lead_aggregator(self, id_name, id_secret):
         self.register(id_name, id_secret, "'leadAggregator=true:ecert'")
-
