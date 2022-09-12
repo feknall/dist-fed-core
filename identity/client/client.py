@@ -7,6 +7,7 @@ import os
 import sys
 from urllib.parse import urlparse
 
+from identity.client.client_agent import ClientAgent
 from identity.common.fabric_ca_args_parser import FabricCaArgParser
 from identity.common.fabric_ca_client_wrapper import FabricCaClientWrapper
 
@@ -28,41 +29,6 @@ from identity.base.support.utils import (  # noqa:E402
 
 logging.basicConfig(level=logging.WARNING)
 LOGGER = logging.getLogger(__name__)
-
-
-class ClientAgent(AriesAgent):
-    def __init__(
-            self,
-            ident: str,
-            http_port: int,
-            admin_port: int,
-            no_auto: bool = False,
-            aip: int = 20,
-            endorser_role: str = None,
-            **kwargs,
-    ):
-        super().__init__(
-            ident,
-            http_port,
-            admin_port,
-            prefix="Client",
-            no_auto=no_auto,
-            seed=None,
-            aip=aip,
-            endorser_role=endorser_role,
-            **kwargs,
-        )
-        self.connection_id = None
-        self._connection_ready = None
-        self.cred_state = {}
-
-    async def detect_connection(self):
-        await self._connection_ready
-        self._connection_ready = None
-
-    @property
-    def connection_ready(self):
-        return self._connection_ready.done() and self._connection_ready.result()
 
 
 async def input_invitation(agent_container):
